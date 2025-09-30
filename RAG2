@@ -1,0 +1,21 @@
+from langchain_openai import AzureChatOpenAI
+from langchain.schema import HumanMessage, SystemMessage
+
+chat_client = AzureChatOpenAI(
+    deployment_name="gpt-4-km",
+    api_version="2024-08-01-preview",
+    azure_endpoint="https://openai-production001.openai.azure.com/",
+    api_key="24d6f09f8b0f44b1a1b90da2488fb417"
+)
+
+# Use SystemMessage and HumanMessage
+messages = [
+    SystemMessage(content="You are a helpful assistant that helps people find information."),
+    HumanMessage(content="Hello! What can you do?")
+]
+
+# Use the generate method (or invoke)
+response = chat_client.generate(messages=[messages])
+
+# Access the text
+print(response.generations[0][0].text)
